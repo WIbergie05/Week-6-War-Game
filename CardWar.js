@@ -1,203 +1,98 @@
-// package gameOfWar;
+// gameOfWar;
 
 class Card {
-     Spades = 0;
-     Hearts = 1;
-     Clubs = 2;
-     Diamonds = 3;
+    suit = ['Spade', 'Heart', 'Club', 'Diamond']
+    faceCard = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 
-     Jack = 11;
-     Queen = 12;
-     King = 13;
-     Ace = 14;
 
-            cardName;
-            cardValue;
-
-Card(cardName, cardValue) {
-    this.setCardName(cardName);
-    this.setcardValue(cardValue);
-}
-    setCardName(newCardName) {
-    if (newCardName >= 0 && newCardName <= 3) {
-        this.cardName = newCardName;
-    } else{
-        throw new IllegalArgumentException("Card needs to be between 0 and 3");
-    }
-}
-    setCardValue(newCardValue) {
-    if(newCardValue < 2 || newCardValue > 14) {
-        throw new IllegalArgumentException("Card value needs to be between 2 and 14!");
-    }
-    this.cardValue = newCardValue;
-}
-    getValue(){
-    return this.cardValue;
-}
-
-    toString() {
-    let card = "";
-    if (cardValue == 2) {
-        card += "2";
-    } else if (cardVlaue == 3) {
-        card += "3";
-    } else if (cardVlaue == 4) {
-        card += "4";
-    } else if (cardVlaue == 5) {
-        card += "5";
-    } else if (cardVlaue == 6) {
-        card += "6";
-    } else if (cardVlaue == 7) {
-        card += "7";
-    } else if (cardVlaue == 8) {
-        card += "8";
-    } else if (cardVlaue == 9) {
-        card += "9";
-    } else if (cardVlaue == 10) {
-        card += "10";
-    } else if (cardVlaue == Jack) {
-        card += "Jack";
-    } else if (cardVlaue == Queen) {
-        card += "Queen";
-    } else if (cardVlaue == King) {
-        card += "King";
-    } else if (cardVlaue == Ace) {
-        card += "Ace";
+constructor(faceCard, suit) {
+    this.faceCard = faceCard
+    this.suit = suit
     }
 
-    card += " of ";
-
-    if (cardName == Spades) {
-        card += "Spades";
-    } else if (cardName == Hearts) {
-        card += "Hearts";
-    } else if (cardName == Clubs) {
-        card += "Clubs";
-    } else if (cardName == Diamonds) {
-        card += "Diamonds";
+    flipCard(){
+        return this.faceCard + 'of' + this.suit
     }
-    return card;
-}
-    describe() {
-    System.out.println(this.toString() + "/n");
- }
 
 }
 
 class Deck{
-
-    // List<Card> deck = new ArrayList<Card>();
-    deck = new ArrayList.Card;
+    constructor() {
+        this.cards = [];
+        let i = 0;
+        for (let face of Card.faceCard) {
+            for (let suit of Card.suit) {
+               this.cards[iterator++] = new Card(faceCard, suit);
+               }
+        }
+    }
 
     shuffle() {
-        Collection.shuffle(deck);
-    }
-
-     PlayCard() {
-        // Card playCard = this.deck.get(0);
-        playCard = this.deck.get(0);
-        this.deck.remove(0);
-        return playedCard;
-    }
-
-    Deck() {
-        for(i = 0; i < 4; i++) {
-            for(j = 2; j <= 14; j++) {
-                this.deck.add(new Card(i, j));
-            }
+        for (let i = 0; i < this.cards.length; i++) {
+            let j = Math.floor(Math.random() * this.cards.length);
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
         }
-    }
-    // List<Card> getCards() {
-        getCards(){
-        return this.deck;
-    }
-    // setCards(List<Card> deck) {
-        setCards(deck) {
-        this.deck = deck;
-    }
-
-       draw() {
-        if (deck.isEmpty()) {
-            FileSystem.out.println("There are no more cards");
-            return null;
-        } else {
-            Card.drawTopCard = deck.get(0);
-            deck.remove(0);
-            return drawTopCard;
-        }
-    }
-
+     }
 }
 
 class Player {
-    // List<Card> hand = new ArrayList<Card>();
-    hand = new ArrayList.Card
-        score;
-        name;
-
-    Player(name) {
+    constructor(name) {
         this.score = 0;
         this.name = name;
-    }
-
-describe() {
-    System.out.println(name + score + "points!/n");
-    for 
-    (card, hand) {
-        card.describe();
-    }
-    System.out.println("*******************************");
-    } 
-
-    flip() {
-        Card.drawTopCard = hand.get(0);
-        hand.remove(0);
-        return drawTopCard;
-    }
-
-    draw(deck) {
-        card = deck.draw();
-        this.hand.add(card);
-    }
-    incrementScore() {
-        this.score++;
-    }
-}
-
-class App {
-
-    deck = new Deck();
-    shuffle(deck);
-    playerOne = ("Erin");
-    playerTwo = ("Ken");
-
-        for(i = 1; i >= 26; i++) {
-            playerOne.hand.add(deck.draw());
-            playerTwo.hand.add(deck.draw());
+        this.hand = [];
+        if (typeof this.name != 'string') {
+            throw Error ('Name can only have letters')
         }
-         playerOne.describe();
-         playerTwo.describe();
-
-         for(i = 0; i <= 26; i++) {
-            Card.playerOneCard = playerOne.flip();
-            Card.playerTwoCard = playerTwo.flip();
-                if (playerOneCard.getValue() > playerTwoCard.getValue()) {
-                    playerOne.incrementScore();
-                } else if (playerOneCard.getValue < playerTwoCard.getValue()) {
-                    playerTwo.incrementScore();
-                } else {
-                    System.out.println();
-                }
-
-                if (playerOne.score > playerTwo.score) {
-                    System.out.println("Erin" + "Wins!");
-                    System.out.println("With a score of" + playerOne.score + "to" + playerTwo.score);
-                } else if (playerTwo.score > playerOne.score) {
-                    System.out.println("Ken" + "Wins!");
-                    System.out.println("With a score of" + playerTwo.score + "to" + playerOne.score);
-                } else {
-                    System.out.println("Draw");
-                }
-         }
-
+    }
 }
+
+let player1 = new Player('Erin');
+let player2 = new Player('Ken');
+let deck = new Deck();
+deck.shuffle();
+function dealHand(deck, player1, player2){
+    for ( let i = 0; i < deck.cards.length; i = i +2 ) {
+        player1.hand.push(deck.cards[i]);
+        player2.hand.push (deck.cards[i + 1]);
+    }
+}
+
+function playGame(player1, player2){
+    let turns = player1.hand.length;
+    for (let i = 0; i < turns; i++){
+        let cardPlayed1 = player1.hand.pop();
+        let cardPlayed2 = player2.hand.pop();
+
+        let displayTurns = `${player1.name} play ${cardPlayed1.showCard()} and ${player2.name}
+        plays ${cardPlayed2.showCard()}.`;
+
+        let cardPlayed1Value = Card.face.indexOf(cardPlayed1.face);
+        let cardPlayed2Value = Card.face.indexOf(cardPlayed2.face);
+
+        if (cardPlayed1Value > cardPlayed2Value) {
+            console.log(displayTurns + `${player1.name} win this round!`);
+            player1.score++;
+        }else if (cardPlayed1Value < cardPlayed2Value) {
+            console.log(displayTurns + `${player2.name} wins this round!`);
+            player2.score++;
+    }else {
+        console.log(displayTurns + 'No one wins, no score!');
+        }
+    }
+}
+
+function endGame(player1, player2) {
+    if (player1.score > player2.score){
+        console.log (`${player1.name} won the match with ${player1.score} points! \n
+        ${player2.name} had a score of ${player2.score} points!`);
+    }else if (player1.score < player2.score){
+        console.log (`${player2.name} won the match with ${player2.score} points! \n
+        ${player1.name} had a score of ${player1.score} points!`);
+    }else {
+        console.log('Nobody wins! It is a draw!');
+    }
+}
+
+dealHand(deck, player1, player2);
+startGame(player1, player2);
+endGame(player1, player2);
