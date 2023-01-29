@@ -143,7 +143,7 @@ class Player {
 describe() {
     System.out.println(name + score + "points!/n");
     for 
-    (card : hand) {
+    (card, hand) {
         card.describe();
     }
     System.out.println("*******************************");
@@ -167,7 +167,7 @@ describe() {
 class App {
 
     deck = new Deck();
-    deck.shuffle();
+    shuffle(deck);
     playerOne = ("Erin");
     playerTwo = ("Ken");
 

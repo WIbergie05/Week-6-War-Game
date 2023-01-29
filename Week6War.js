@@ -220,3 +220,6 @@ newGame.dealCards();
 while(player1.hand.length > 0 && player2.hand.length > 0){
     runGame();
 }
+
+console.log(newGame);
+
